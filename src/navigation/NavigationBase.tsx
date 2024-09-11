@@ -1,30 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { StyleSheet } from "react-native";
+import FarmListScreen from "../screens/farmListScreen/FarmListScreen";
 import LoginScreen from "../screens/loginScreen/LoginScreen";
 import { useAuth } from "../store/AuthContext";
-import ButtonBase from "../components/buttonBase/ButtonBase";
 
+const Stack = createNativeStackNavigator();
 const NavigationBase = () => {
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
 
+  if (!token) {
+    return <LoginScreen />;
+  }
   return (
-    <>
-      {token ? (
-        <View>
-          <Text>LOGEADITO</Text>
-          <Text>LOGEADITO</Text>
-          <Text>LOGEADITO</Text>
-          <ButtonBase
-            title="LOGOUT"
-            onPress={() => {
-              setToken(null);
-            }}
-          />
-        </View>
-      ) : (
-        <LoginScreen />
-      )}
-    </>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={FarmListScreen} />
+    </Stack.Navigator>
   );
 };
 
