@@ -1,32 +1,48 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import LayoutBase from "../../components/layoutBase/LayoutBase";
-import { useAuth } from "../../store/AuthContext";
+import { ActivityIndicator, FlatList, StyleSheet, Text } from "react-native";
 import ButtonBase from "../../components/buttonBase/ButtonBase";
-import { getFarmList } from "../../services/api";
-import { Farm } from "../../domain/models/Farm.model";
 import FarmCard from "../../components/farmCard/FarmCard";
+import LayoutBase from "../../components/layoutBase/LayoutBase";
+import { Farm } from "../../domain/models/Farm.model";
+import { getFarmList } from "../../services/api";
+import { useAuth } from "../../store/AuthContext";
 
 const FarmListScreen = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
-  const [farmList, setFarmList] = useState<Farm[] | undefined>([]);
+  const [loadingFooter, setLoadingFooter] = useState(true);
+  const [farmList, setFarmList] = useState<Farm[] | any>([]);
+  const [page, setPage] = useState(1);
   const { token, setToken } = useAuth();
 
   useEffect(() => {
-    onHandleGetFarmData();
-  }, []);
+    if (farmList.length != 0 || page == 1) {
+      onHandleGetFarmData();
+    }
+  }, [page]);
 
   const onHandleGetFarmData = async () => {
-    const farmListResponse = await getFarmList(token);
-    setFarmList(farmListResponse);
+    if (page > 4) {
+      setLoadingFooter(false);
+    } else {
+      const farmListResponse: any = await getFarmList(token, page);
+      setFarmList([...farmList, ...farmListResponse]);
+    }
   };
 
-  const onHandreRefreshFarmData = () => {
-    setRefreshing(true);
-    onHandleGetFarmData();
-    setRefreshing(false);
+  const onHandreRefreshFarmData = async () => {
+    if (page != 1) {
+      setRefreshing(true);
+      setLoadingFooter(true);
+      setFarmList([]);
+      setRefreshing(false);
+      setPage(1);
+    }
   };
-
+  const lazyLoadingFarm = () => {
+    if (farmList.length != 0) {
+      setPage(page + 1);
+    }
+  };
   return (
     <LayoutBase scrollEnabled={false}>
       <Text>FarmListScreen</Text>
@@ -36,6 +52,11 @@ const FarmListScreen = () => {
         renderItem={({ item }) => <FarmCard farm={item} />}
         onRefresh={onHandreRefreshFarmData}
         refreshing={refreshing}
+        ListFooterComponent={() =>
+          loadingFooter && <ActivityIndicator size={"large"} />
+        }
+        onEndReached={lazyLoadingFarm}
+        onEndReachedThreshold={0.3}
       />
     </LayoutBase>
   );
