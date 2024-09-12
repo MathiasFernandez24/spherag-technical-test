@@ -1,9 +1,11 @@
+import { FarmAdapter } from "../domain/adapters/Farm.adapter";
 import { LoginDataModel } from "../domain/models/LoginData.model";
 
 const API_AUTH = "https://preapi.spherag.com/Authentication/Login";
-const API_GETSYSTEM =
-  "https://preapicore.spherag.com/System/List?Init=1&Limit=20&Total=true";
+const API_GETFARM =
+  "https://preapicore.spherag.com/System/List?Init=1&Limit=5&Total=true";
 
+//Login
 export const loginRequest = async (loginData: LoginDataModel): Promise<any> => {
   try {
     const response = await fetch(API_AUTH, {
@@ -29,36 +31,51 @@ export const loginRequest = async (loginData: LoginDataModel): Promise<any> => {
 };
 
 // --- hasta acá chequeado--- 12/9  00:18hs
-export const getSystemList = async (token: string) => {
+//Get Farms list
+export const getFarmList = async (token: string | null) => {
   try {
-    const response = await fetch(API_GETSYSTEM, {
-      method: "GET", // Puedes usar POST, PUT, DELETE según sea necesario
+    const response = await fetch(API_GETFARM, {
+      method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`, // El token se pasa aquí
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
-      console.log("------------------------INICIO---");
-      console.log("ERROR");
-      console.log(response);
-      console.log("------------------------FIN------");
       throw new Error(`Error: ${response.status}`);
     }
-
     const data = await response.json();
-    console.log("------------------------INICIO---");
-    console.log(data.records);
-    // setTest(data.records);
-    console.log("------------------------FIN------");
-
-    return data; // Puedes procesar los datos como desees
+    return FarmAdapter(data.records);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
+// --- hasta acá chequeado--- 12/9  15:48hs
+//GET Systems List by Id
+export const getSystemListByFarmId = async (
+  token: string | null,
+  id: string
+) => {
+  try {
+    const response = await fetch(API_GETSYSTEM, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    return FarmAdapter(data.records);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 /**
 PRUEBA TECNICA SPHERAG
 Buenas tardes Mathias,

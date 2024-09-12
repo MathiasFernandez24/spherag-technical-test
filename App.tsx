@@ -7,7 +7,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <StatusBar style="auto" />
+        <StatusBar style="auto" hidden />
         <NavigationBase />
       </AuthProvider>
     </NavigationContainer>

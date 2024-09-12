@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import { StyleSheet } from "react-native";
+import FarmDetailScreen from "../screens/farmDetailScreen/FarmDetailScreen";
 import FarmListScreen from "../screens/farmListScreen/FarmListScreen";
 import LoginScreen from "../screens/loginScreen/LoginScreen";
 import { useAuth } from "../store/AuthContext";
+import { RootStackParamList } from "./NavigationBase.type";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const NavigationBase = () => {
   const { token } = useAuth();
 
@@ -14,11 +15,10 @@ const NavigationBase = () => {
   }
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={FarmListScreen} />
+      <Stack.Screen name="Farms" component={FarmListScreen} />
+      <Stack.Screen name="FarmDetail" component={FarmDetailScreen} />
     </Stack.Navigator>
   );
 };
 
 export default NavigationBase;
-
-const styles = StyleSheet.create({});
