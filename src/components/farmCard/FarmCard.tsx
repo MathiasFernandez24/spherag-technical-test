@@ -10,13 +10,13 @@ const FarmCard = (props: FarmCardType) => {
 
   const { navigate } = useNavigation<NavigationType>();
 
-  const navigateTodetail = () => {
+  const navigateToFarmDetail = () => {
     navigate("FarmDetail", { farmId: id });
   };
   return (
     <TouchableOpacity
       style={{ margin: 10, backgroundColor: "pink" }}
-      onPress={navigateTodetail}
+      onPress={navigateToFarmDetail}
     >
       <Text>FarmCard</Text>
       <Text>{name}</Text>

@@ -11,6 +11,7 @@ const FarmListScreen = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [loadingFooter, setLoadingFooter] = useState(true);
   const [farmList, setFarmList] = useState<Farm[] | any>([]);
+  const [pageLimit, setPageLimit] = useState(1);
   const [page, setPage] = useState(1);
   const { token, setToken } = useAuth();
 
@@ -21,10 +22,14 @@ const FarmListScreen = () => {
   }, [page]);
 
   const onHandleGetFarmData = async () => {
-    if (page > 4) {
+    if (page > pageLimit) {
       setLoadingFooter(false);
     } else {
-      const farmListResponse: any = await getFarmList(token, page);
+      const response: any = await getFarmList(token, page);
+      const farmListResponse = response.data;
+      const maxPagesSize = response.maxPagesSize;
+      setPageLimit(maxPagesSize);
+
       setFarmList([...farmList, ...farmListResponse]);
     }
   };

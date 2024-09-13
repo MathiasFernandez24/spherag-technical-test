@@ -1,16 +1,10 @@
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
 import React, { useState } from "react";
-import LayoutBase from "../../components/layoutBase/LayoutBase";
-import { loginRequest } from "../../services/api";
+import { ActivityIndicator, StyleSheet, Text, TextInput } from "react-native";
 import ButtonBase from "../../components/buttonBase/ButtonBase";
-import { useAuth } from "../../store/AuthContext";
+import LayoutBase from "../../components/layoutBase/LayoutBase";
 import { LoginDataModel } from "../../domain/models/LoginData.model";
+import { loginRequest } from "../../services/api";
+import { useAuth } from "../../store/AuthContext";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("testUserII@spherag.com");
@@ -25,10 +19,17 @@ const LoginScreen = () => {
       username: username,
       password: password,
     };
-    const tokenAuth = await loginRequest(loginData).catch(() => {
-      setErrorLogin(true);
-      setIsloading(false);
-    });
+    const tokenAuth = await loginRequest(loginData)
+      .then((res) => {
+        setTimeout(() => {
+          setToken("");
+        }, 3600000);
+        return res;
+      })
+      .catch(() => {
+        setErrorLogin(true);
+        setIsloading(false);
+      });
     setToken(tokenAuth.token);
     setErrorLogin(false);
     setIsloading(false);
