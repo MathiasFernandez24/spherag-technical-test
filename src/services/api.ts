@@ -22,11 +22,8 @@ export const loginRequest = async (loginData: LoginDataModel): Promise<any> => {
     }
 
     const data = await response.json();
-    console.log("PRESS");
-    console.log(data);
-
     return data;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(`Login failed: ${error.message}`);
   }
 };
@@ -235,9 +232,9 @@ La prueba técnica consiste en realizar una app de móvil en React Native. Para 
  - AtlasResponse:
    - Imei: Identificador
    - Name: Nombre
-   - ProductTypeName: Nombre del tipo de producto
-   - Latitude: Latitud de las coordenadas
-   - Longitude: Longitud de las coordenadas
+   x- ProductTypeName: Nombre del tipo de producto
+   x- Latitude: Latitud de las coordenadas
+   x- Longitude: Longitud de las coordenadas
    - BatteryPercentage: % de batería
    - SignalPercentage: % de Señal
    - ExpiredDate: Fecha de fin de suscripción
@@ -266,8 +263,8 @@ La prueba técnica consiste en realizar una app de móvil en React Native. Para 
  Params:
    - 865648065109316: Imei del atlas
  Result:
-   - Imei: Identificador
-   - Name: Nombre
+   +- Imei: Identificador
+   +- Name: Nombre
    - ProductTypeName: Nombre del tipo de producto
    - Latitude: Latitud de las coordenadas
    - Longitude: Longitud de las coordenadas

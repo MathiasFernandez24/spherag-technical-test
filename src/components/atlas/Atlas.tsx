@@ -25,13 +25,13 @@ const Atlas = (props: AtlasType) => {
       style={{ margin: 10, backgroundColor: "pink" }}
       onPress={navigateToFarmDetail}
     >
-      <Text>{atlasStatus}</Text>
-      <Text>{batteryPercentage}</Text>
-      <Text>{expiredDate}</Text>
-      <Text>{imei}</Text>
-      <Text>{name}</Text>
-      <Text>{signalPercentage}</Text>
-      <Text>{type}</Text>
+      <Text>atlasStatus: {atlasStatus}</Text>
+      <Text>batteryPercentage: {batteryPercentage}</Text>
+      <Text>expiredDate: {expiredDate}</Text>
+      <Text>imei: {imei}</Text>
+      <Text>name: {name}</Text>
+      <Text>signalPercentage: {signalPercentage}</Text>
+      <Text>type: {type}</Text>
     </TouchableOpacity>
   );
 };
