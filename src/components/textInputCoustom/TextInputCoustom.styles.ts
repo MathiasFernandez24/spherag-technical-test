@@ -3,10 +3,13 @@ import { colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: colors.primary.darker,
-    borderRadius: 8,
+    flexDirection: "row",
     alignItems: "center",
   },
+  textInput: {
+    color: colors.Text.default,
+    fontSize: 24,
+    flex: 1,
+  },
+  iconContainerStyles: { marginEnd: 8 },
 });

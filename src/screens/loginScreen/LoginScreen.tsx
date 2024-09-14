@@ -1,17 +1,32 @@
-import React, { useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, TextInput } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import ButtonBase from "../../components/buttonBase/ButtonBase";
-import LayoutBase from "../../components/layoutBase/LayoutBase";
+import Icon from "../../components/icon/Icon";
+import TextCoustom from "../../components/textCoustom/TextCoustom";
+import TextInputCoustom from "../../components/textInputCoustom/TextInputCoustom";
 import { LoginDataModel } from "../../domain/models/LoginData.model";
 import { loginRequest } from "../../services/api";
 import { useAuth } from "../../store/AuthContext";
+import { colors } from "../../theme/colors";
+import { styles } from "./LoginScreen.styles";
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState("testUserII@spherag.com");
-  const [password, setPassword] = useState("P@ssw0rd12345!");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState(false);
   const [isloading, setIsloading] = useState(false);
-  const { token, setToken } = useAuth();
+  const { setToken } = useAuth();
+  const SpheragLogo = require("../../assets/images/spheragLogo.png");
+
+  useEffect(() => {
+    setErrorLogin(false);
+  }, [username, password]);
 
   const onHandleLogin = async () => {
     setIsloading(true);
@@ -34,28 +49,59 @@ const LoginScreen = () => {
     setErrorLogin(false);
     setIsloading(false);
   };
-
+  const autocompleteLogin = () => {
+    setUsername("testUserII@spherag.com");
+    setPassword("P@ssw0rd12345!");
+  };
   return (
-    <LayoutBase>
-      <Text>LOGIN</Text>
-      <Text numberOfLines={2}>{token}</Text>
-      <TextInput
-        value={username}
-        placeholder="Username"
-        onChangeText={setUsername}
-      />
-      <TextInput
-        value={password}
-        placeholder="Password"
-        onChangeText={setPassword}
-      />
-      <ButtonBase title="Login" onPress={onHandleLogin} />
-      {errorLogin && <Text>Password or user wrong</Text>}
+    <View style={styles.containerView}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ gap: 16 }}>
+          <Image source={SpheragLogo} style={styles.spheragLogo} />
+          <TextInputCoustom
+            value={username}
+            setValue={setUsername}
+            placeholder="username.."
+            leftIconName="user"
+          />
+          <TextInputCoustom
+            value={password}
+            setValue={setPassword}
+            placeholder="password.."
+            leftIconName="key"
+          />
+          {errorLogin && (
+            <TextCoustom
+              text="Password o Usuario incorrecto"
+              fontStyle="S_Normal"
+              textColor={colors.common.error}
+            />
+          )}
+        </View>
+      </ScrollView>
+      <View style={{ flex: 1 }} />
       {isloading && <ActivityIndicator size={"large"} />}
-    </LayoutBase>
+
+      <TouchableOpacity //Autocomplete Button
+        onPress={autocompleteLogin}
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Icon iconName="lookOpen" color={colors.primary.default} />
+        <TextCoustom
+          text="autocompletar login"
+          fontStyle="M_regular"
+          textColor={colors.primary.default}
+          styles={{ alignSelf: "center", textAlign: "center" }}
+        />
+      </TouchableOpacity>
+
+      <ButtonBase title="Login" onPress={onHandleLogin} />
+    </View>
   );
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({});
