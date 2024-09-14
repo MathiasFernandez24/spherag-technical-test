@@ -10,7 +10,7 @@ import { styles } from "./LayoutBase.styles";
 import { LayoutBaseType } from "./LayoutBase.Type";
 
 const LayoutBase = (props: LayoutBaseType) => {
-  const { children, headerTitle } = props;
+  const { children, headerTitle, headerSubTitle } = props;
   const { navigate } = useNavigation<NavigationType>();
   const { setToken } = useAuth();
   const spheragLogo = require("../../assets/images/spheragLogo.png");
@@ -28,13 +28,24 @@ const LayoutBase = (props: LayoutBaseType) => {
         <TouchableOpacity onPress={navigateToFarmListScreen}>
           <Image source={spheragLogo} style={styles.spheragLogo} />
         </TouchableOpacity>
-        <TextCoustom
-          textStyles={{ alignSelf: "center" }}
-          text={headerTitle}
-          fontStyle="L_Normal"
-          textColor={colors.Text.white}
-          containerStyles={{ flex: 1 }}
-        />
+        <View style={styles.headerTitlesContainer}>
+          <TextCoustom
+            textStyles={{ alignSelf: "center" }}
+            text={headerTitle}
+            fontStyle="L_Normal"
+            textColor={colors.Text.white}
+            // containerStyles={{ backgroundColor: "red" }}
+          />
+          {headerSubTitle && (
+            <TextCoustom
+              textStyles={{ alignSelf: "center" }}
+              text={headerSubTitle}
+              fontStyle="S_regular"
+              textColor={colors.Text.white}
+              // containerStyles={{ backgroundColor: "red" }}
+            />
+          )}
+        </View>
         <Icon
           iconName="logout"
           size={32}

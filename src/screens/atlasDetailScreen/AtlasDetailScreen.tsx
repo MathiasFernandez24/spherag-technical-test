@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import LayoutBase from "../../components/layoutBase/LayoutBase";
 import { RouteProp, useRoute } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import LayoutBase from "../../components/layoutBase/LayoutBase";
+import { AtlasDetail } from "../../domain/models/AtlasDetail.model";
 import { RootStackParamListType } from "../../navigation/NavigationBase.type";
 import { getAtlasByImei } from "../../services/api";
 import { useAuth } from "../../store/AuthContext";
-import { AtlasDetail } from "../../domain/models/AtlasDetail.model";
 
 type AtlasDetailRouteProp = RouteProp<RootStackParamListType, "AtlasDetail">;
 const AtlasDetailScreen = () => {
   const { params } = useRoute<AtlasDetailRouteProp>();
+  const { atlasImei, farmName, systemName } = params;
   const [atlasDetail, setAtlasDetail] = useState<AtlasDetail>();
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
   useEffect(() => {
     onHandleGetAtlasDetailData();
   }, []);
@@ -19,7 +20,7 @@ const AtlasDetailScreen = () => {
   const onHandleGetAtlasDetailData = async () => {
     const atlasDetailResponse: any = await getAtlasByImei(
       token,
-      params.atlasImei
+      atlasImei
       // "000000000000017"
     );
     setAtlasDetail(atlasDetailResponse);
@@ -29,9 +30,9 @@ const AtlasDetailScreen = () => {
   console.log('""""""""""""""atlasDetail END""""""""""""""');
 
   return (
-    <LayoutBase>
+    <LayoutBase headerTitle={farmName} headerSubTitle={systemName}>
       <View style={{ gap: 16, paddingBottom: 30 }}>
-        <Text>atlasImei: {params.atlasImei}</Text>
+        <Text>atlasImei: {atlasImei}</Text>
         <Text>atlasStatus: {atlasDetail?.atlasStatus}</Text>
         <Text>batteryPercentage: {atlasDetail?.batteryPercentage}</Text>
         <Text>productTypeName: {atlasDetail?.productTypeName}</Text>

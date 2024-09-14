@@ -5,6 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationType } from "../../navigation/NavigationBase.type";
 
 const Atlas = (props: AtlasType) => {
+  const { atlas, farmName } = props;
   const {
     atlasStatus,
     batteryPercentage,
@@ -13,12 +14,16 @@ const Atlas = (props: AtlasType) => {
     name,
     signalPercentage,
     type,
-  } = props.atlas;
+  } = atlas;
 
   const { navigate } = useNavigation<NavigationType>();
 
   const navigateToFarmDetail = () => {
-    navigate("AtlasDetail", { atlasImei: imei });
+    navigate("AtlasDetail", {
+      atlasImei: imei,
+      farmName: farmName,
+      systemName: name,
+    });
   };
   return (
     <TouchableOpacity

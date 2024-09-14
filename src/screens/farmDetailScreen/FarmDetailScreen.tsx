@@ -10,6 +10,7 @@ import { useAuth } from "../../store/AuthContext";
 type FarmDetailRouteProp = RouteProp<RootStackParamListType, "FarmDetail">;
 const FarmDetailScreen = () => {
   const { params } = useRoute<FarmDetailRouteProp>();
+  const { farmId, farmName } = params;
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [loadingFooter, setLoadingFooter] = useState(true);
@@ -27,11 +28,7 @@ const FarmDetailScreen = () => {
     if (page > pageLimit) {
       setLoadingFooter(false);
     } else {
-      const response: any = await getSystemListByFarmId(
-        token,
-        params.farmId,
-        page
-      );
+      const response: any = await getSystemListByFarmId(token, farmId, page);
       const atlasListResponse = response.data;
       const maxPagesSize = response.maxPagesSize;
       setPageLimit(maxPagesSize);
@@ -56,12 +53,12 @@ const FarmDetailScreen = () => {
   };
 
   return (
-    <LayoutBase headerTitle={params.farmName}>
+    <LayoutBase headerTitle={farmName}>
       <Text>FarmDetailScreen</Text>
-      <Text>{params.farmId}</Text>
+      <Text>{farmId}</Text>
       <FlatList
         data={atlasList}
-        renderItem={({ item }) => <Atlas atlas={item} />}
+        renderItem={({ item }) => <Atlas atlas={item} farmName={farmName} />}
         onRefresh={onHandreRefreshFarmData}
         refreshing={refreshing}
         ListFooterComponent={() =>

@@ -14,6 +14,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
+  headerTitlesContainer: {
+    flex: 1,
+    gap: 4,
+  },
   spheragLogo: {
     width: 40,
     height: 40,
