@@ -1,21 +1,25 @@
 import React from "react";
-import { View, ViewStyle } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { colors } from "../../theme/colors";
-import { AllIconNamesTypes, allIcons } from "./IconIndex";
-import { IconsProps } from "./IconProps.type";
+import { allIcons } from "./IconIndex";
+import { iconProps } from "./IconProps.type";
 
-interface iconProps extends IconsProps {
-  iconName: AllIconNamesTypes;
-  containerStyles?: ViewStyle;
-}
 export default function Icon(props: iconProps) {
   const {
     iconName,
     color = colors.neutral.default,
     size = 24,
     containerStyles,
+    onPress,
   } = props;
   return (
-    <View style={containerStyles}>{allIcons[iconName]({ color, size })}</View>
+    <TouchableOpacity
+      style={containerStyles}
+      onPress={onPress}
+      disabled={!onPress}
+      hitSlop={24}
+    >
+      {allIcons[iconName]({ color, size })}
+    </TouchableOpacity>
   );
 }

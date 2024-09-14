@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     color: colors.Text.default,
-    fontSize: 24,
+    fontSize: 18,
     flex: 1,
   },
   iconContainerStyles: { marginEnd: 8 },

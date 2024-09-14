@@ -22,7 +22,7 @@ const LoginScreen = () => {
   const [errorLogin, setErrorLogin] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const { setToken } = useAuth();
-  const SpheragLogo = require("../../assets/images/spheragLogo.png");
+  const SpheragLogo = require("../../assets/images/spheragName.png");
 
   useEffect(() => {
     setErrorLogin(false);
@@ -84,18 +84,13 @@ const LoginScreen = () => {
 
       <TouchableOpacity //Autocomplete Button
         onPress={autocompleteLogin}
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        style={styles.autoCompleteButtonContainer}
       >
         <Icon iconName="lookOpen" color={colors.primary.default} />
         <TextCoustom
           text="autocompletar login"
           fontStyle="M_regular"
           textColor={colors.primary.default}
-          styles={{ alignSelf: "center", textAlign: "center" }}
         />
       </TouchableOpacity>
 

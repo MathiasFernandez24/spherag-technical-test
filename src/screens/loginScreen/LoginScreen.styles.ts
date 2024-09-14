@@ -18,4 +18,9 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     alignSelf: "center",
   },
+  autoCompleteButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

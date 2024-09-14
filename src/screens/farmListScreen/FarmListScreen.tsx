@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, Text } from "react-native";
-import ButtonBase from "../../components/buttonBase/ButtonBase";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import FarmCard from "../../components/farmCard/FarmCard";
-import LayoutBase from "../../components/layoutBase/LayoutBase";
+import Icon from "../../components/icon/Icon";
+import Separator from "../../components/separator/Separator";
+import TextCoustom from "../../components/textCoustom/TextCoustom";
 import { Farm } from "../../domain/models/Farm.model";
 import { getFarmList } from "../../services/api";
 import { useAuth } from "../../store/AuthContext";
+import { colors } from "../../theme/colors";
+import { styles } from "./FarmListScreen.styles";
 
 const FarmListScreen = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -29,7 +32,6 @@ const FarmListScreen = () => {
       const farmListResponse = response.data;
       const maxPagesSize = response.maxPagesSize;
       setPageLimit(maxPagesSize);
-
       setFarmList([...farmList, ...farmListResponse]);
     }
   };
@@ -48,10 +50,34 @@ const FarmListScreen = () => {
       setPage(page + 1);
     }
   };
+
+  const logout = () => {
+    setToken(null);
+  };
   return (
-    <LayoutBase scrollEnabled={false}>
-      <Text>FarmListScreen</Text>
-      <ButtonBase title="LOGOUT" onPress={() => setToken(null)} />
+    <View style={styles.container}>
+      <View
+        style={{
+          flexDirection: "row",
+          backgroundColor: colors.primary.darker,
+          padding: 16,
+          paddingTop: 48,
+        }}
+      >
+        <TextCoustom
+          text="Fincas"
+          fontStyle="XL_Bold"
+          textColor={colors.Text.white}
+          containerStyles={{ flex: 1 }}
+        />
+        <Icon
+          iconName="logout"
+          size={32}
+          color={colors.Text.white}
+          containerStyles={{ alignSelf: "center" }}
+          onPress={logout}
+        />
+      </View>
       <FlatList
         data={farmList}
         renderItem={({ item }) => <FarmCard farm={item} />}
@@ -60,13 +86,14 @@ const FarmListScreen = () => {
         ListFooterComponent={() =>
           loadingFooter && <ActivityIndicator size={"large"} />
         }
+        ItemSeparatorComponent={() => (
+          <Separator color={colors.primary.lighter} />
+        )}
         onEndReached={lazyLoadingFarm}
         onEndReachedThreshold={0.3}
       />
-    </LayoutBase>
+    </View>
   );
 };
 
 export default FarmListScreen;
-
-const styles = StyleSheet.create({});
