@@ -10,12 +10,12 @@ import { FarmCardType } from "./FarmCard.type";
 
 const FarmCard = (props: FarmCardType) => {
   const { name, description, favorite, timezone, id } = props.farm;
-
   const { navigate } = useNavigation<NavigationType>();
 
   const navigateToFarmDetail = () => {
-    navigate("FarmDetail", { farmId: id });
+    navigate("FarmDetail", { farmId: id, farmName: name });
   };
+
   return (
     <TouchableOpacity style={styles.container} onPress={navigateToFarmDetail}>
       <View style={{ flexDirection: "row" }}>
@@ -28,19 +28,15 @@ const FarmCard = (props: FarmCardType) => {
         )}
         <TextCoustom
           text={name}
-          fontStyle="L_Bold"
+          fontStyle="M_Bold"
           containerStyles={{ flex: 1 }}
         />
       </View>
-      <TextCoustom text={`Descripcion: ${description}`} fontStyle="M_regular" />
+      <TextCoustom text={`Descripcion: ${description}`} fontStyle="S_Normal" />
       <View style={{ flexDirection: "row" }}>
         <Icon iconName="clock" containerStyles={styles.iconClock} size={20} />
         <TextCoustom text={`${timezone} Hs.`} fontStyle="S_regular" />
       </View>
-      {/* <Text>description: {description}</Text>
-      <Text>timezone: {timezone}</Text>
-      <Text>favorite: {favorite ? "true" : "false"}</Text>
-      <Text>id: {id}</Text> */}
     </TouchableOpacity>
   );
 };

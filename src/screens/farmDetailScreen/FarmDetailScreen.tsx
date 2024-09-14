@@ -1,6 +1,6 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, FlatList, Text } from "react-native";
 import Atlas from "../../components/atlas/Atlas";
 import LayoutBase from "../../components/layoutBase/LayoutBase";
 import { RootStackParamListType } from "../../navigation/NavigationBase.type";
@@ -16,7 +16,7 @@ const FarmDetailScreen = () => {
   const [atlasList, setAtlasList] = useState<any>([]);
   const [pageLimit, setPageLimit] = useState(1);
   const [page, setPage] = useState(1);
-  const { token, setToken } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     if (atlasList.length != 0 || page == 1) {
@@ -56,7 +56,7 @@ const FarmDetailScreen = () => {
   };
 
   return (
-    <LayoutBase scrollEnabled={false}>
+    <LayoutBase headerTitle={params.farmName}>
       <Text>FarmDetailScreen</Text>
       <Text>{params.farmId}</Text>
       <FlatList

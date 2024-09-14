@@ -1,19 +1,50 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
+import { NavigationType } from "../../navigation/NavigationBase.type";
+import { useAuth } from "../../store/AuthContext";
+import { colors } from "../../theme/colors";
+import Icon from "../icon/Icon";
+import TextCoustom from "../textCoustom/TextCoustom";
 import { styles } from "./LayoutBase.styles";
 import { LayoutBaseType } from "./LayoutBase.Type";
 
 const LayoutBase = (props: LayoutBaseType) => {
-  const { children, scrollEnabled = true } = props;
+  const { children, headerTitle } = props;
+  const { navigate } = useNavigation<NavigationType>();
+  const { setToken } = useAuth();
+  const spheragLogo = require("../../assets/images/spheragLogo.png");
+
+  const navigateToFarmListScreen = () => {
+    navigate("Farms");
+  };
+  const logout = () => {
+    setToken(null);
+  };
 
   return (
-    <>
-      {scrollEnabled ? (
-        <ScrollView style={styles.container}>{children}</ScrollView>
-      ) : (
-        <View style={styles.container}>{children}</View>
-      )}
-    </>
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={navigateToFarmListScreen}>
+          <Image source={spheragLogo} style={styles.spheragLogo} />
+        </TouchableOpacity>
+        <TextCoustom
+          textStyles={{ alignSelf: "center" }}
+          text={headerTitle}
+          fontStyle="L_Normal"
+          textColor={colors.Text.white}
+          containerStyles={{ flex: 1 }}
+        />
+        <Icon
+          iconName="logout"
+          size={32}
+          color={colors.Text.white}
+          containerStyles={{ alignSelf: "center" }}
+          onPress={logout}
+        />
+      </View>
+      {children}
+    </View>
   );
 };
 

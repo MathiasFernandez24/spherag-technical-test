@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import FarmCard from "../../components/farmCard/FarmCard";
-import Icon from "../../components/icon/Icon";
+import LayoutBase from "../../components/layoutBase/LayoutBase";
 import Separator from "../../components/separator/Separator";
-import TextCoustom from "../../components/textCoustom/TextCoustom";
 import { Farm } from "../../domain/models/Farm.model";
 import { getFarmList } from "../../services/api";
 import { useAuth } from "../../store/AuthContext";
 import { colors } from "../../theme/colors";
-import { styles } from "./FarmListScreen.styles";
 
 const FarmListScreen = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -51,33 +49,8 @@ const FarmListScreen = () => {
     }
   };
 
-  const logout = () => {
-    setToken(null);
-  };
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: colors.primary.darker,
-          padding: 16,
-          paddingTop: 48,
-        }}
-      >
-        <TextCoustom
-          text="Fincas"
-          fontStyle="XL_Bold"
-          textColor={colors.Text.white}
-          containerStyles={{ flex: 1 }}
-        />
-        <Icon
-          iconName="logout"
-          size={32}
-          color={colors.Text.white}
-          containerStyles={{ alignSelf: "center" }}
-          onPress={logout}
-        />
-      </View>
+    <LayoutBase headerTitle="Fincas">
       <FlatList
         data={farmList}
         renderItem={({ item }) => <FarmCard farm={item} />}
@@ -92,7 +65,7 @@ const FarmListScreen = () => {
         onEndReached={lazyLoadingFarm}
         onEndReachedThreshold={0.3}
       />
-    </View>
+    </LayoutBase>
   );
 };
 

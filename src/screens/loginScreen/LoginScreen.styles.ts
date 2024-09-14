@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   titles: { alignSelf: "center" },
-  spheragLogo: {
+  spheragText: {
     width: 300,
     height: 60,
     resizeMode: "cover",

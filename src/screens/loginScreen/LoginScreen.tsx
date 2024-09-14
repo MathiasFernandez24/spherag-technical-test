@@ -22,7 +22,7 @@ const LoginScreen = () => {
   const [errorLogin, setErrorLogin] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const { setToken } = useAuth();
-  const SpheragLogo = require("../../assets/images/spheragName.png");
+  const spheragText = require("../../assets/images/spheragName.png");
 
   useEffect(() => {
     setErrorLogin(false);
@@ -57,7 +57,7 @@ const LoginScreen = () => {
     <View style={styles.containerView}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ gap: 16 }}>
-          <Image source={SpheragLogo} style={styles.spheragLogo} />
+          <Image source={spheragText} style={styles.spheragText} />
           <TextInputCoustom
             value={username}
             setValue={setUsername}

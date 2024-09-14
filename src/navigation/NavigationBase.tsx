@@ -15,7 +15,12 @@ const NavigationBase = () => {
     return <LoginScreen />;
   }
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        animation: "fade_from_bottom",
+      }}
+    >
       <Stack.Screen name="Farms" component={FarmListScreen} />
       <Stack.Screen name="FarmDetail" component={FarmDetailScreen} />
       <Stack.Screen name="AtlasDetail" component={AtlasDetailScreen} />

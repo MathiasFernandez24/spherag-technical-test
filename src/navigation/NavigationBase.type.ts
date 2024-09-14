@@ -2,7 +2,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type RootStackParamListType = {
   Farms: undefined;
-  FarmDetail: { farmId: string };
+  FarmDetail: { farmId: string; farmName: string };
   AtlasDetail: { atlasImei: string };
 };
 
