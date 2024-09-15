@@ -1,18 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { NavigationType } from "../../navigation/NavigationBase.type";
 import { useAuth } from "../../store/AuthContext";
 import { colors } from "../../theme/colors";
 import Icon from "../icon/Icon";
+import ModalDropdownBase from "../modalDropdownBase/ModalDropDownBase";
 import TextCoustom from "../textCoustom/TextCoustom";
 import { styles } from "./LayoutBase.styles";
 import { LayoutBaseType } from "./LayoutBase.Type";
+import ButtonBase from "../buttonBase/ButtonBase";
 
 const LayoutBase = (props: LayoutBaseType) => {
   const { children, headerTitle, headerSubTitle } = props;
   const { navigate } = useNavigation<NavigationType>();
   const { setToken } = useAuth();
+  const [isVisibleModalDropdownLogout, setIsVisibleModalDropdownLogout] =
+    useState(false);
   const spheragLogo = require("../../assets/images/spheragLogo.png");
 
   const navigateToFarmListScreen = () => {
@@ -21,7 +25,12 @@ const LayoutBase = (props: LayoutBaseType) => {
   const logout = () => {
     setToken(null);
   };
-
+  const closeModal = () => {
+    setIsVisibleModalDropdownLogout(false);
+  };
+  const openModal = () => {
+    setIsVisibleModalDropdownLogout(true);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -49,10 +58,23 @@ const LayoutBase = (props: LayoutBaseType) => {
           size={32}
           color={colors.Text.white}
           containerStyles={{ alignSelf: "center" }}
-          onPress={logout}
+          onPress={openModal}
         />
       </View>
       {children}
+      <ModalDropdownBase
+        visibility={isVisibleModalDropdownLogout}
+        onClose={closeModal}
+      >
+        <View style={{ padding: 30, gap: 16 }}>
+          <TextCoustom
+            text="Seguro quiere salir?"
+            fontStyle="M_Normal"
+            textStyles={{ alignSelf: "center" }}
+          />
+          <ButtonBase title="Salir" onPress={logout} />
+        </View>
+      </ModalDropdownBase>
     </View>
   );
 };

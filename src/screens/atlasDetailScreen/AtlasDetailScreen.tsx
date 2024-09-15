@@ -37,7 +37,7 @@ const AtlasDetailScreen = () => {
 
   useEffect(() => {
     if (mapRef.current) {
-      mapRef.current.fitToCoordinates(coordinates, {
+      mapRef.current.fitToCoordinates(pinCoords, {
         edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
         animated: true,
       });
@@ -79,12 +79,6 @@ const AtlasDetailScreen = () => {
   const onHandleSensorConectors = () => {
     setIsVisibleSensor(!isVisibleSensor);
   };
-
-  const coordinates = [
-    { latitude: 37.78825, longitude: -122.4324, name: "TEST", color: "red" },
-    { latitude: 37.78925, longitude: -122.4334, name: "TEST2", color: "blue" },
-    { latitude: 37.79025, longitude: -122.4344, name: "TEST3", color: "green" },
-  ];
 
   return (
     <LayoutBase headerTitle={farmName} headerSubTitle={systemName}>

@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import CardContainer from "../../../../components/cardContainer/CardContainer";
 import { MapPinModel } from "../../../../domain/models/MapPin.model";
 
+const heightMap = Dimensions.get("screen").height * 0.5;
 type MapPinProps = {
   mapRef: React.RefObject<MapView>;
   pinCoords: MapPinModel[];
@@ -48,7 +49,7 @@ export default MapPin;
 const styles = StyleSheet.create({
   map: {
     width: "100%",
-    height: 500,
+    height: heightMap,
     alignSelf: "center",
     borderRadius: 16,
   },

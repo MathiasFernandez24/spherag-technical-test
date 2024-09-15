@@ -1,6 +1,6 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import Atlas from "../../components/atlas/Atlas";
 import LayoutBase from "../../components/layoutBase/LayoutBase";
 import { RootStackParamListType } from "../../navigation/NavigationBase.type";
@@ -37,11 +37,12 @@ const FarmDetailScreen = () => {
         setLoadingFooter(false);
       });
       const atlasListResponse = response.data;
-      const maxPagesSize = response.maxPagesSize;
-      setPageLimit(maxPagesSize);
-      if (atlasList.length < 20) {
+      if (atlasListResponse.length < 10) {
         setLoadingFooter(false);
       }
+      const maxPagesSize = response.maxPagesSize;
+      setPageLimit(maxPagesSize);
+
       setAtlasList([...atlasList, ...atlasListResponse]);
     }
   };
@@ -69,7 +70,11 @@ const FarmDetailScreen = () => {
         onRefresh={onHandreRefreshFarmData}
         refreshing={refreshing}
         ListFooterComponent={() =>
-          loadingFooter && <ActivityIndicator size={"large"} />
+          loadingFooter ? (
+            <ActivityIndicator size={"large"} />
+          ) : (
+            <View style={{ height: 30 }} />
+          )
         }
         onEndReached={lazyLoadingFarm}
         onEndReachedThreshold={0.3}
