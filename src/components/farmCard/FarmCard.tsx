@@ -28,11 +28,11 @@ const FarmCard = (props: FarmCardType) => {
         )}
         <TextCoustom
           text={name}
-          fontStyle="M_Bold"
+          fontStyle="M_Normal"
           containerStyles={{ flex: 1 }}
         />
       </View>
-      <TextCoustom text={`Descripcion: ${description}`} fontStyle="S_Normal" />
+      <TextCoustom text={description} fontStyle="S_Normal" />
       <View style={{ flexDirection: "row" }}>
         <Icon iconName="clock" containerStyles={styles.iconClock} size={20} />
         <TextCoustom text={`${timezone} Hs.`} fontStyle="S_regular" />

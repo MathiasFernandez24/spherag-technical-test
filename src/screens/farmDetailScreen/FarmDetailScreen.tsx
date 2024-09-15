@@ -1,6 +1,6 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import Atlas from "../../components/atlas/Atlas";
 import LayoutBase from "../../components/layoutBase/LayoutBase";
 import { RootStackParamListType } from "../../navigation/NavigationBase.type";
@@ -24,15 +24,24 @@ const FarmDetailScreen = () => {
       onHandleGetAtlasData();
     }
   }, [page]);
+
   const onHandleGetAtlasData = async () => {
     if (page > pageLimit) {
       setLoadingFooter(false);
     } else {
-      const response: any = await getSystemListByFarmId(token, farmId, page);
+      const response: any = await getSystemListByFarmId(
+        token,
+        farmId,
+        page
+      ).catch(() => {
+        setLoadingFooter(false);
+      });
       const atlasListResponse = response.data;
       const maxPagesSize = response.maxPagesSize;
       setPageLimit(maxPagesSize);
-
+      if (atlasList.length < 20) {
+        setLoadingFooter(false);
+      }
       setAtlasList([...atlasList, ...atlasListResponse]);
     }
   };
@@ -54,8 +63,6 @@ const FarmDetailScreen = () => {
 
   return (
     <LayoutBase headerTitle={farmName}>
-      <Text>FarmDetailScreen</Text>
-      <Text>{farmId}</Text>
       <FlatList
         data={atlasList}
         renderItem={({ item }) => <Atlas atlas={item} farmName={farmName} />}

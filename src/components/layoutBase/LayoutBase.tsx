@@ -34,7 +34,6 @@ const LayoutBase = (props: LayoutBaseType) => {
             text={headerTitle}
             fontStyle="L_Normal"
             textColor={colors.Text.white}
-            // containerStyles={{ backgroundColor: "red" }}
           />
           {headerSubTitle && (
             <TextCoustom
@@ -42,7 +41,6 @@ const LayoutBase = (props: LayoutBaseType) => {
               text={headerSubTitle}
               fontStyle="S_regular"
               textColor={colors.Text.white}
-              // containerStyles={{ backgroundColor: "red" }}
             />
           )}
         </View>

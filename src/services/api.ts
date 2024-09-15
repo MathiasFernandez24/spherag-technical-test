@@ -47,7 +47,7 @@ export const getFarmList = async (token: string | null, page: number) => {
     };
     return res;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    throw new Error("Error fetching data:", error);
   }
 };
 
@@ -70,6 +70,7 @@ export const getSystemListByFarmId = async (
     );
 
     if (!response.ok) {
+      console.log("ERROR");
       throw new Error(`Error: ${response.status}`);
     }
     const data = await response.json();
@@ -79,7 +80,7 @@ export const getSystemListByFarmId = async (
     };
     return res;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    throw new Error("Error fetching data:", error);
   }
 };
 

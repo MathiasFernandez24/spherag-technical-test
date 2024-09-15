@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     paddingTop: 48,
     alignItems: "center",
     gap: 12,
+    zIndex: 1,
   },
   headerTitlesContainer: {
     flex: 1,
