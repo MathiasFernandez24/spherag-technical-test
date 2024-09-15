@@ -89,4 +89,9 @@ export const colors = {
     error: primitiveColors.red[500],
     succes: primitiveColors.green[500],
   },
+  mapPin: {
+    mapPin1: primitiveColors.green[400],
+    mapPin2: primitiveColors.red[400],
+    mapPin3: primitiveColors.blue[400],
+  },
 };

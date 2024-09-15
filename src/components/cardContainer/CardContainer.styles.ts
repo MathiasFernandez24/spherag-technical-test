@@ -3,6 +3,7 @@ import { colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
+    overflow: "hidden",
     backgroundColor: colors.background.white,
     borderRadius: 16,
     padding: 16,

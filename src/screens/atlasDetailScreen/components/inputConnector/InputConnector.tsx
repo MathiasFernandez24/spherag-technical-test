@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Separator from "../../../../components/separator/Separator";
 import TextCoustom from "../../../../components/textCoustom/TextCoustom";
 import { InputConector } from "../../../../domain/models/Conectors.model";
@@ -19,8 +19,8 @@ const InputConnector = (props: InputConnectorProps) => {
     }
   };
   return (
-    <View style={{ gap: 8 }}>
-      <Separator marginVertical={8} />
+    <View style={styles.container}>
+      <Separator />
       <TextCoustom text={name} fontStyle="S_Normal" />
       <View>
         <TextCoustom
@@ -39,3 +39,7 @@ const InputConnector = (props: InputConnectorProps) => {
 };
 
 export default InputConnector;
+
+export const styles = StyleSheet.create({
+  container: { gap: 8, paddingBottom: 16, paddingHorizontal: 16 },
+});

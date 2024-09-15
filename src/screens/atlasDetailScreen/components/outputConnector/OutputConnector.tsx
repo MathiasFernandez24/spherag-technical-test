@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Separator from "../../../../components/separator/Separator";
 import TextCoustom from "../../../../components/textCoustom/TextCoustom";
 import { OutputConector } from "../../../../domain/models/Conectors.model";
@@ -8,8 +8,8 @@ const OutputConnector = (props: OutputConnectorProps) => {
   const { fertilizer, mixer, name, pump, valve } = props.outputConnector;
 
   return (
-    <View style={{ gap: 8 }}>
-      <Separator marginVertical={8} />
+    <View style={styles.container}>
+      <Separator />
       <TextCoustom text={name} fontStyle="S_Normal" />
       <View>
         {pump.mode && pump.status && (
@@ -57,3 +57,7 @@ const OutputConnector = (props: OutputConnectorProps) => {
 };
 
 export default OutputConnector;
+
+export const styles = StyleSheet.create({
+  container: { gap: 8, paddingBottom: 16, paddingHorizontal: 16 },
+});

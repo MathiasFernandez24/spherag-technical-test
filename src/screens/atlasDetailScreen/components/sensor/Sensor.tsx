@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Separator from "../../../../components/separator/Separator";
 import TextCoustom from "../../../../components/textCoustom/TextCoustom";
 import { SensorConector } from "../../../../domain/models/Conectors.model";
@@ -9,8 +9,8 @@ type SensorProps = {
 const Sensor = (props: SensorProps) => {
   const { name, type } = props.sensor;
   return (
-    <View style={{ gap: 8 }}>
-      <Separator marginVertical={8} />
+    <View style={styles.container}>
+      <Separator />
       <TextCoustom text={name} fontStyle="S_Normal" />
       <TextCoustom text={type} fontStyle="S_regular" />
     </View>
@@ -18,3 +18,7 @@ const Sensor = (props: SensorProps) => {
 };
 
 export default Sensor;
+
+export const styles = StyleSheet.create({
+  container: { gap: 8, paddingBottom: 16, paddingHorizontal: 16 },
+});
