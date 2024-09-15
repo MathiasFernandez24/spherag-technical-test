@@ -17,8 +17,8 @@ export const InputConectorAdapter = (inputConector: any): InputConector => {
     digitalInput: inputConector.digitalInput,
     flowmeter: {
       accumulated24: {
-        symbol: inputConector.flowmeter.accumulated24.symbol,
-        value: inputConector.flowmeter.accumulated24.value,
+        symbol: inputConector.flowmeter?.accumulated24?.symbol,
+        value: inputConector.flowmeter?.accumulated24?.value,
       },
     },
   };
@@ -27,7 +27,7 @@ export const InputConectorAdapter = (inputConector: any): InputConector => {
 export const InputConectorAdapterList = (
   inputConectorList: any
 ): InputConector[] => {
-  const formatedInputConectorList: InputConector[] = inputConectorList.map(
+  const formatedInputConectorList: InputConector[] = inputConectorList?.map(
     (inputConectorItem: any): InputConector =>
       InputConectorAdapter(inputConectorItem)
   );
@@ -42,20 +42,20 @@ export const OutputConectorAdapter = (outputConector: any): OutputConector => {
     longitude: outputConector.longitude,
     type: outputConector.type,
     fertilizer: {
-      mode: selectMode(outputConector.fertilizer.mode),
-      status: selectStatus(outputConector.fertilizer.status),
+      mode: selectMode(outputConector.fertilizer?.mode),
+      status: selectStatus(outputConector.fertilizer?.status),
     },
     mixer: {
-      mode: selectMode(outputConector.mixer.mode),
-      status: selectStatus(outputConector.mixer.status),
+      mode: selectMode(outputConector.mixer?.mode),
+      status: selectStatus(outputConector.mixer?.status),
     },
     pump: {
-      mode: selectMode(outputConector.pump.mode),
-      status: selectStatus(outputConector.pump.status),
+      mode: selectMode(outputConector.pump?.mode),
+      status: selectStatus(outputConector.pump?.status),
     },
     valve: {
-      mode: selectMode(outputConector.valve.mode),
-      status: selectStatus(outputConector.valve.status),
+      mode: selectMode(outputConector.valve?.mode),
+      status: selectStatus(outputConector.valve?.status),
     },
   };
   return formatedInputConector;
@@ -63,7 +63,7 @@ export const OutputConectorAdapter = (outputConector: any): OutputConector => {
 export const OutputConectorAdapterList = (
   outputConectorList: any
 ): OutputConector[] => {
-  const formatedInputConectorList: OutputConector[] = outputConectorList.map(
+  const formatedInputConectorList: OutputConector[] = outputConectorList?.map(
     (outputConectorItem: any): InputConector =>
       InputConectorAdapter(outputConectorItem)
   );
@@ -72,11 +72,11 @@ export const OutputConectorAdapterList = (
 
 export const SensorConectorAdapter = (sensorConector: any): SensorConector => {
   const formatedInputConector: SensorConector = {
-    name: sensorConector.name,
-    connectorNumber: sensorConector.connectorNumber,
-    latitude: sensorConector.latitude,
-    longitude: sensorConector.longitude,
-    type: selectSensorType(sensorConector.type),
+    name: sensorConector?.name,
+    connectorNumber: sensorConector?.connectorNumber,
+    latitude: sensorConector?.latitude,
+    longitude: sensorConector?.longitude,
+    type: selectSensorType(sensorConector?.type),
   };
   return formatedInputConector;
 };
@@ -84,7 +84,7 @@ export const SensorConectorAdapter = (sensorConector: any): SensorConector => {
 export const SensorConectorAdapterList = (
   sensorConectorList: any
 ): SensorConector[] => {
-  const formatedSensorConectorList: SensorConector[] = sensorConectorList.map(
+  const formatedSensorConectorList: SensorConector[] = sensorConectorList?.map(
     (sensorConectorItem: any): SensorConector =>
       SensorConectorAdapter(sensorConectorItem)
   );

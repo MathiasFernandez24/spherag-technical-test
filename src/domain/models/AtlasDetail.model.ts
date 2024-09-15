@@ -11,9 +11,9 @@ export interface AtlasDetail extends AtlasBase {
   latitude: string;
   longitude: string;
   connectors: {
-    input: InputConector[];
-    output: OutputConector[];
-    sensor: SensorConector[];
+    input: InputConector[] | null;
+    output: OutputConector[] | null;
+    sensor: SensorConector[] | null;
   };
 }
 

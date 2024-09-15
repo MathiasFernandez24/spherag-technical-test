@@ -1,4 +1,5 @@
 import { AtlasAdapterList } from "../domain/adapters/Atlas.adapter";
+import { AtlasDetailAdapter } from "../domain/adapters/AtlasDetail.adapter";
 import { FarmAdapterList } from "../domain/adapters/Farm.adapter";
 import { LoginDataModel } from "../domain/models/LoginData.model";
 
@@ -46,7 +47,7 @@ export const getFarmList = async (token: string | null, page: number) => {
       maxPagesSize: data.totalPages,
     };
     return res;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error("Error fetching data:", error);
   }
 };
@@ -79,7 +80,7 @@ export const getSystemListByFarmId = async (
       maxPagesSize: data.totalPages,
     };
     return res;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error("Error fetching data:", error);
   }
 };
@@ -101,8 +102,9 @@ export const getAtlasByImei = async (token: string | null, imei: string) => {
       throw new Error(`Error: ${response.status}`);
     }
     const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
+    const res = AtlasDetailAdapter(data);
+    return res;
+  } catch (error: any) {
+    throw new Error("Error fetching data:", error);
   }
 };
