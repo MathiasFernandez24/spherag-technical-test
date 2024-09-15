@@ -19,7 +19,6 @@ import InputConnector from "./components/inputConnector/InputConnector";
 import MapPin from "./components/mapPin/MapPin";
 import OutputConnector from "./components/outputConnector/OutputConnector";
 import Sensor from "./components/sensor/Sensor";
-import Separator from "../../components/separator/Separator";
 
 type AtlasDetailRouteProp = RouteProp<RootStackParamListType, "AtlasDetail">;
 const AtlasDetailScreen = () => {
@@ -84,7 +83,7 @@ const AtlasDetailScreen = () => {
     <LayoutBase headerTitle={farmName} headerSubTitle={systemName}>
       <ScrollView>
         {atlasDetail ? (
-          <View>
+          <View style={styles.container}>
             <View style={styles.containerAtlas}>
               <Icon
                 iconName="fileDescription"

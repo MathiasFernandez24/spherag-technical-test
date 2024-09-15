@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
+  container: { paddingBottom: 24 },
   containerAtlas: {
     margin: 8,
     marginTop: 18,

@@ -45,7 +45,9 @@ export const AddColorToCoords = (
 
 const getOffsetValueCoords = (value: number) => {
   const offsetMargin = 0.0001;
-  const offsetValue: number = Math.random() * offsetMargin + value;
+  const result: number = Math.random() * offsetMargin + value;
+  const factor = Math.pow(10, 5);
+  const offsetValue = Math.round(result * factor) / factor;
   return offsetValue;
 };
 export const getMarkerOffset = (offsetMargin: number) => {
