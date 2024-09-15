@@ -36,7 +36,7 @@ La prueba técnica consiste en realizar una app de móvil en React Native. Para 
            - Nombre
            - Acumulado24h: Valor+símbolo (Ej: 54€) - Si es null, pintamos N/A
          - Digital Input:
-           - Nombre
+           x- Nombre
            - Estado
        - Outputs:
          - Bomba:

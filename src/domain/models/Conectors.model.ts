@@ -68,5 +68,5 @@ export type SensorType =
   | "TINOVI"
   | "DLQIFENG5TE"
   | "Desconocido";
-export type statusType = "Cerrado" | "Abierto" | "Desconocido";
-export type modeType = "Manual" | "Auto" | "Desconocido";
+export type statusType = "Cerrado" | "Abierto" | null;
+export type modeType = "Manual" | "Auto" | null;

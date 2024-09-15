@@ -14,7 +14,7 @@ export const InputConectorAdapter = (inputConector: any): InputConector => {
     latitude: inputConector.latitude,
     longitude: inputConector.longitude,
     type: inputConector.type,
-    digitalInput: inputConector.digitalInput,
+    digitalInput: { status: selectStatus(inputConector.digitalInput?.status) },
     flowmeter: {
       accumulated24: {
         symbol: inputConector.flowmeter?.accumulated24?.symbol,
@@ -43,7 +43,7 @@ export const OutputConectorAdapter = (outputConector: any): OutputConector => {
     type: outputConector.type,
     fertilizer: {
       mode: selectMode(outputConector.fertilizer?.mode),
-      status: selectStatus(outputConector.fertilizer?.status),
+      status: selectStatus(outputConector?.fertilizer?.status),
     },
     mixer: {
       mode: selectMode(outputConector.mixer?.mode),
@@ -63,11 +63,11 @@ export const OutputConectorAdapter = (outputConector: any): OutputConector => {
 export const OutputConectorAdapterList = (
   outputConectorList: any
 ): OutputConector[] => {
-  const formatedInputConectorList: OutputConector[] = outputConectorList?.map(
-    (outputConectorItem: any): InputConector =>
-      InputConectorAdapter(outputConectorItem)
+  const formatedOutputConectorList: OutputConector[] = outputConectorList?.map(
+    (outputConectorItem: any): OutputConector =>
+      OutputConectorAdapter(outputConectorItem)
   );
-  return formatedInputConectorList;
+  return formatedOutputConectorList;
 };
 
 export const SensorConectorAdapter = (sensorConector: any): SensorConector => {
@@ -91,24 +91,24 @@ export const SensorConectorAdapterList = (
   return formatedSensorConectorList;
 };
 
-const selectStatus = (status: 0 | 1): statusType => {
+const selectStatus = (status: 0 | 1 | null): statusType => {
   switch (status) {
     case 0:
       return "Cerrado";
     case 1:
       return "Abierto";
     default:
-      return "Desconocido";
+      return null;
   }
 };
-const selectMode = (mode: 0 | 1): modeType => {
+const selectMode = (mode: 0 | 1 | null): modeType => {
   switch (mode) {
     case 0:
       return "Manual";
     case 1:
       return "Auto";
     default:
-      return "Desconocido";
+      return null;
   }
 };
 type sensorApiResponseType =
