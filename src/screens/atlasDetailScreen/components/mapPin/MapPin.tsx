@@ -1,9 +1,10 @@
 import React from "react";
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import CardContainer from "../../../../components/cardContainer/CardContainer";
 import { MapPinModel } from "../../../../domain/models/MapPin.model";
 import { colors } from "../../../../theme/colors";
+import TextCoustom from "../../../../components/textCoustom/TextCoustom";
 
 const heightMap = Dimensions.get("screen").height * 0.55;
 type MapPinProps = {
@@ -31,8 +32,14 @@ const MapPin = (props: MapPinProps) => {
   };
   return (
     <CardContainer styleContainer={{ padding: 0 }}>
-      {/* <View style={styles.map}> //Replace MapView with this for build APK/AAB
+      {/* <View style={styles.map} // When build APK/AAS, replace this code for MapView
+      >
         <TextCoustom text="MAPA INTERACTIVO" fontStyle="M_Bold" />
+        <TextCoustom
+          text="(solo disponible para pruebas con expo)"
+          fontStyle="S_Normal"
+          textStyles={{ textAlign: "center" }}
+        />
       </View> */}
       <MapView
         ref={mapRef}

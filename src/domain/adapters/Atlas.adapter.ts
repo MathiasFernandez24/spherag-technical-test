@@ -2,6 +2,7 @@ import {
   Atlas,
   atlasEnergyModeType,
   atlasStatusType,
+  atlasTypeType,
 } from "../models/Atlas.model";
 
 export const AtlasAdapter = (atlas: any): Atlas => {
@@ -12,7 +13,7 @@ export const AtlasAdapter = (atlas: any): Atlas => {
     imei: atlas.imei,
     name: atlas.name,
     signalPercentage: atlas.signalPercentage,
-    type: atlas.type,
+    type: selectAtlasType(atlas.type),
     energyMode: selectAtlasenergyMode(atlas.energyMode),
   };
   return formatedAtlas;
@@ -25,11 +26,12 @@ export const AtlasAdapterList = (atlasList: any): Atlas[] => {
   return formatedAtlasList;
 };
 
-type atlasApiResponseType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type atlasApiResponseStatus = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type atlasApiResponseEnergyMode = 0 | 1 | 2;
+type atlasApiResponseType = 1 | 2 | 4 | 5 | 6 | 10 | 11 | 13 | 15 | 16 | 17;
 
 export const selectAtlasStatus = (
-  atlasStatus: atlasApiResponseType
+  atlasStatus: atlasApiResponseStatus
 ): atlasStatusType => {
   switch (atlasStatus) {
     case 1:
@@ -71,6 +73,35 @@ export const selectAtlasenergyMode = (
       return "Eco";
     case 2:
       return "Sleep";
+    default:
+      return "N/A";
+  }
+};
+
+const selectAtlasType = (type: atlasApiResponseType): atlasTypeType => {
+  switch (type) {
+    case 1:
+      return "Atlas 1";
+    case 2:
+      return "Atlas 2";
+    case 4:
+      return "ATLAS_2 COUNT";
+    case 5:
+      return "ATLAS_2G";
+    case 6:
+      return "ATLAS_2S";
+    case 10:
+      return "ATLAS_2SP";
+    case 11:
+      return "ATLAS_2G_SP";
+    case 13:
+      return "ATLAS_2G_SPB";
+    case 15:
+      return "ATLAS_2SPB";
+    case 16:
+      return "ATLAS_PLUS";
+    case 17:
+      return "Atlas_Plus_S";
     default:
       return "N/A";
   }

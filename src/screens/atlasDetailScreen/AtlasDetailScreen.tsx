@@ -111,6 +111,10 @@ const AtlasDetailScreen = () => {
                 fontStyle="S_regular"
               />
               <TextCoustom
+                text={`Modo bateria: ${atlasDetail?.energyMode}`}
+                fontStyle="S_regular"
+              />
+              <TextCoustom
                 text={`Señal: ${atlasDetail?.signalPercentage}%`}
                 fontStyle="S_regular"
               />
