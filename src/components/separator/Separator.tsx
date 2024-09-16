@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { colors } from "../../theme/colors";
 import { separatorProps } from "./Separator.type";
 const Separator = (props: separatorProps) => {
@@ -21,5 +21,3 @@ const Separator = (props: separatorProps) => {
 };
 
 export default Separator;
-
-const styles = StyleSheet.create({});

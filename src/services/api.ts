@@ -71,7 +71,6 @@ export const getSystemListByFarmId = async (
     );
 
     if (!response.ok) {
-      console.log("ERROR");
       throw new Error(`Error: ${response.status}`);
     }
     const data = await response.json();

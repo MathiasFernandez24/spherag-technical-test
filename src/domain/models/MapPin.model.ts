@@ -3,6 +3,6 @@ export interface MapPinModel {
   latitudeOffset: number;
   longitude: number;
   longitudeOffset: number;
-  title: string;
+  title: string | undefined;
   color: string;
 }

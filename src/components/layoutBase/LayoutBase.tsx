@@ -45,12 +45,22 @@ const LayoutBase = (props: LayoutBaseType) => {
             textColor={colors.Text.white}
           />
           {headerSubTitle && (
-            <TextCoustom
-              textStyles={{ alignSelf: "center" }}
-              text={headerSubTitle}
-              fontStyle="S_regular"
-              textColor={colors.Text.white}
-            />
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 8,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Icon iconName="mapPin" color={colors.mapPin.mapPin4} size={20} />
+              <TextCoustom
+                textStyles={{ alignSelf: "center" }}
+                text={headerSubTitle}
+                fontStyle="S_regular"
+                textColor={colors.Text.white}
+              />
+            </View>
           )}
         </View>
         <Icon
@@ -66,12 +76,11 @@ const LayoutBase = (props: LayoutBaseType) => {
         visibility={isVisibleModalDropdownLogout}
         onClose={closeModal}
       >
-        <View style={{ padding: 30, gap: 16 }}>
-          <TextCoustom
-            text="Seguro quiere salir?"
-            fontStyle="M_Normal"
-            textStyles={{ alignSelf: "center" }}
-          />
+        <View style={styles.logoutContainer}>
+          <View style={styles.logoutHeaderContainer}>
+            <TextCoustom text="Seguro desea salir?" fontStyle="M_Normal" />
+            <Icon iconName="logout" color={colors.neutral.darker} />
+          </View>
           <ButtonBase title="Salir" onPress={logout} />
         </View>
       </ModalDropdownBase>

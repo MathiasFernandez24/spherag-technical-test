@@ -5,6 +5,7 @@ export interface AtlasBase {
   signalPercentage: number;
   expiredDate: string;
   atlasStatus: atlasStatusType;
+  energyMode: atlasEnergyModeType;
 }
 export interface Atlas extends AtlasBase {
   type: number;
@@ -24,3 +25,5 @@ export type atlasStatusType =
   | "RealTime con señal baja"
   | "RealTime con batería y señal bajas"
   | "Desconocido";
+
+export type atlasEnergyModeType = "RealTime" | "Eco" | "Sleep" | "N/A";

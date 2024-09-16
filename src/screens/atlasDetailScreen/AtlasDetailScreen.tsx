@@ -24,7 +24,7 @@ type AtlasDetailRouteProp = RouteProp<RootStackParamListType, "AtlasDetail">;
 const AtlasDetailScreen = () => {
   const { params } = useRoute<AtlasDetailRouteProp>();
   const { atlasImei, farmName, systemName } = params;
-  const [atlasDetail, setAtlasDetail] = useState<AtlasDetail>();
+  const [atlasDetail, setAtlasDetail] = useState<AtlasDetail | void>();
   const [isVisibleInput, setIsVisibleInput] = useState<boolean>(false);
   const [isVisibleOutput, setIsVisibleOutput] = useState<boolean>(false);
   const [isVisibleSensor, setIsVisibleSensor] = useState<boolean>(false);
@@ -41,6 +41,14 @@ const AtlasDetailScreen = () => {
         animated: true,
       });
     }
+    const atlas: MapPinModel = {
+      color: colors.mapPin.mapPin4,
+      latitude: Number(atlasDetail?.latitude),
+      latitudeOffset: Number(atlasDetail?.latitude),
+      longitude: Number(atlasDetail?.longitude),
+      longitudeOffset: Number(atlasDetail?.longitude),
+      title: atlasDetail?.name,
+    };
     const inputPins = AddColorToCoords(
       atlasDetail?.connectors?.input,
       colors.mapPin.mapPin1
@@ -54,6 +62,9 @@ const AtlasDetailScreen = () => {
       colors.mapPin.mapPin3
     );
     setPinCoords([...inputPins, ...outputPins, ...sensorPins]);
+    if (atlasDetail) {
+      setPinCoords((prevState) => [...prevState, atlas]);
+    }
   }, [atlasDetail]);
 
   useEffect(() => {
@@ -61,10 +72,9 @@ const AtlasDetailScreen = () => {
   }, []);
 
   const onHandleGetAtlasDetailData = async () => {
-    const atlasDetailResponse: AtlasDetail = await getAtlasByImei(
+    const atlasDetailResponse: AtlasDetail | void = await getAtlasByImei(
       token,
       atlasImei
-      // "000000000000017"
     );
     setAtlasDetail(atlasDetailResponse);
   };

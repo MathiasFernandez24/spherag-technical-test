@@ -1,5 +1,5 @@
 import { AtlasDetail } from "../models/AtlasDetail.model";
-import { selectAtlasStatus } from "./Atlas.adapter";
+import { selectAtlasenergyMode, selectAtlasStatus } from "./Atlas.adapter";
 import {
   InputConectorAdapterList,
   OutputConectorAdapterList,
@@ -18,6 +18,7 @@ export const AtlasDetailAdapter = (atlasDetail: any): AtlasDetail => {
     latitude: atlasDetail.latitude,
     longitude: atlasDetail.longitude,
     productTypeName: atlasDetail.productTypeName,
+    energyMode: selectAtlasenergyMode(atlasDetail.energyMode),
     connectors: {
       input: InputConectorAdapterList(atlasDetail.connectors.input),
       output: OutputConectorAdapterList(atlasDetail.connectors.output),

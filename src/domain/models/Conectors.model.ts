@@ -8,10 +8,7 @@ interface ConectorBase {
 
 export interface InputConector extends ConectorBase {
   flowmeter: {
-    accumulated24: {
-      value: number;
-      symbol: string;
-    };
+    accumulated24: { value: number; symbol: string };
   };
   digitalInput: {
     status: statusType;
@@ -39,7 +36,14 @@ export interface OutputConector extends ConectorBase {
 
 export interface SensorConector extends ConectorBase {
   type: SensorType;
+  sensor: { values: valueSymbolNameType[] } | null;
 }
+
+type valueSymbolNameType = {
+  value: number;
+  symbol: string;
+  name: string;
+};
 
 export type ConnectorType =
   | "Bomba"

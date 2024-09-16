@@ -77,6 +77,7 @@ export const SensorConectorAdapter = (sensorConector: any): SensorConector => {
     latitude: sensorConector?.latitude,
     longitude: sensorConector?.longitude,
     type: selectSensorType(sensorConector?.type),
+    sensor: { values: sensorConector?.sensor?.values },
   };
   return formatedInputConector;
 };

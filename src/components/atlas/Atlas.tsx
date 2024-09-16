@@ -4,6 +4,10 @@ import { View } from "react-native";
 import { NavigationType } from "../../navigation/NavigationBase.type";
 import { colors } from "../../theme/colors";
 import { dateFormated } from "../../utils/dateFormat";
+import {
+  getEnergyModeColor,
+  getEnergyModeIconName,
+} from "../../utils/iconsService";
 import CardContainer from "../cardContainer/CardContainer";
 import Icon from "../icon/Icon";
 import Separator from "../separator/Separator";
@@ -21,6 +25,7 @@ const Atlas = (props: AtlasType) => {
     name,
     signalPercentage,
     type,
+    energyMode,
   } = atlas;
 
   const { navigate } = useNavigation<NavigationType>();
@@ -40,7 +45,14 @@ const Atlas = (props: AtlasType) => {
       onPress={navigateToFarmDetail}
       styleContainer={styles.container}
     >
-      <TextCoustom text={name} fontStyle="M_Normal" />
+      <View style={styles.headerContainer}>
+        <TextCoustom text={name} fontStyle="M_Normal" />
+        <Icon
+          iconName={getEnergyModeIconName(energyMode)}
+          color={getEnergyModeColor(energyMode)}
+          size={24}
+        />
+      </View>
       <TextCoustom text={`status: ${atlasStatus}`} fontStyle="S_regular" />
       <TextCoustom text={`imei: ${imei}`} fontStyle="S_regular" />
       <TextCoustom text={`type: ${type}`} fontStyle="S_regular" />
@@ -66,7 +78,13 @@ const Atlas = (props: AtlasType) => {
           <Icon
             iconName={isBatteryActive ? "battery" : "batteryOff"}
             size={24}
-            color={isBatteryActive ? colors.common.succes : colors.common.error}
+            color={
+              isBatteryActive
+                ? batteryPercentage > 70
+                  ? colors.common.allColors.green
+                  : colors.common.allColors.yellow
+                : colors.common.error
+            }
           />
           <TextCoustom text={`${batteryPercentage}%`} fontStyle="S_regular" />
         </View>

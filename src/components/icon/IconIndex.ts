@@ -1,5 +1,8 @@
+import IconAlertTriangle from "./iconsSVG/IconAlertTriangle";
 import IconBattery from "./iconsSVG/IconBattery";
+import IconBatteryEco from "./iconsSVG/IconBatteryEco";
 import IconBatteryOff from "./iconsSVG/IconBatteryOff";
+import IconBolt from "./iconsSVG/IconBolt";
 import IconCalendarCancel from "./iconsSVG/IconCalendarCancel";
 import IconClock from "./iconsSVG/IconClock";
 import IconFavorite from "./iconsSVG/IconFavorite";
@@ -10,6 +13,7 @@ import IconLookOpen from "./iconsSVG/IconLookOpen";
 import IconMapPin from "./iconsSVG/IconMapPin";
 import IconSignal from "./iconsSVG/IconSignal";
 import IconSignalOff from "./iconsSVG/IconSignalOff";
+import IconSleep from "./iconsSVG/IconSleep";
 import IconUser from "./iconsSVG/IconUser";
 
 export const allIcons = {
@@ -26,6 +30,10 @@ export const allIcons = {
   calendarCancel: IconCalendarCancel,
   mapPin: IconMapPin,
   fileDescription: IconFileDescription,
+  batteryEco: IconBatteryEco,
+  sleep: IconSleep,
+  bolt: IconBolt,
+  alertTriangle: IconAlertTriangle,
 };
 
 export type AllIconNamesTypes = keyof typeof allIcons;

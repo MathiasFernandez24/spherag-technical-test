@@ -1,4 +1,8 @@
-import { Atlas, atlasStatusType } from "../models/Atlas.model";
+import {
+  Atlas,
+  atlasEnergyModeType,
+  atlasStatusType,
+} from "../models/Atlas.model";
 
 export const AtlasAdapter = (atlas: any): Atlas => {
   const formatedAtlas: Atlas = {
@@ -9,6 +13,7 @@ export const AtlasAdapter = (atlas: any): Atlas => {
     name: atlas.name,
     signalPercentage: atlas.signalPercentage,
     type: atlas.type,
+    energyMode: selectAtlasenergyMode(atlas.energyMode),
   };
   return formatedAtlas;
 };
@@ -20,9 +25,11 @@ export const AtlasAdapterList = (atlasList: any): Atlas[] => {
   return formatedAtlasList;
 };
 
-type atlasApiResponeType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type atlasApiResponseType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type atlasApiResponseEnergyMode = 0 | 1 | 2;
+
 export const selectAtlasStatus = (
-  atlasStatus: atlasApiResponeType
+  atlasStatus: atlasApiResponseType
 ): atlasStatusType => {
   switch (atlasStatus) {
     case 1:
@@ -51,5 +58,20 @@ export const selectAtlasStatus = (
       return "RealTime con batería y señal bajas";
     default:
       return "Desconocido";
+  }
+};
+
+export const selectAtlasenergyMode = (
+  atlasStatus: atlasApiResponseEnergyMode
+): atlasEnergyModeType => {
+  switch (atlasStatus) {
+    case 0:
+      return "RealTime";
+    case 1:
+      return "Eco";
+    case 2:
+      return "Sleep";
+    default:
+      return "N/A";
   }
 };

@@ -16,5 +16,3 @@ export interface AtlasDetail extends AtlasBase {
     sensor: SensorConector[] | null;
   };
 }
-
-export type energyModeType = "RealTime" | "Eco" | "Sleep" | "Desconocido";

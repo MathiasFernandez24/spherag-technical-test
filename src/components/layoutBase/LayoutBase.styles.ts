@@ -26,4 +26,11 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignSelf: "center",
   },
+  logoutHeaderContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+  },
+  logoutContainer: { padding: 30, gap: 16 },
 });

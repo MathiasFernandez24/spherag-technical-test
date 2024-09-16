@@ -1,4 +1,3 @@
-/**
 PRUEBA TECNICA SPHERAG
 Buenas tardes Mathias,
 La prueba técnica consiste en realizar una app de móvil en React Native. Para realizar las diferentes llamadas a la API, se deberá realizar una llamada para obtener un token que se enviará en las diferentes llamadas como bearer token. La obtención de este token será transparente para el usuario.
@@ -251,4 +250,67 @@ Adjunto la colección de llamadas y el entorno con las distintas urls para que p
 Si necesitas ayuda en cualquier parte, podemos agendar una llamada e intento aclarar lo que necesites.
 
 Un saludo.
-**/
+-----------------------------------------------------FIN-----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+consultas realizadas:
+
+En el modelo entregado de SensorConector se indica:
+-BusType  (No retorna ese resultado el endpoint)
+-Type (es correcto que el 11 sea igual al 13 y el 12 igual al14?)
+-Values (No retorna ese resultado el endpoint)
+OK
+
+Get AtlasList By System deberia devolder latitud y longitud pero eso es retornado en  GetAtlasByImei, en el detalle de las respuestas esperadas figura, aunque no es solicitado en el requisito
+OK
+
+Get AtlasList By System no retorna "productTypeName", que deberia contener el nombre del producto, aunque si retorna "type" en forma de numero, no poseeo la referencia para asignarle el nombre en caso que así corresponda y en el detalle del producto (GetAtlas) obtengo el nombre del tipo de producto, pero el requerimento solo indica el tipo, por el momento voy a poner el numero en el listado de sistemas, y en el detalle el nombre del producto
+# AÑADIR equivalentes, nunca null
+1	Atlas 1
+
+2	Atlas 2
+
+4	ATLAS_2 COUNT
+
+5	ATLAS_2G
+
+6	ATLAS_2S
+
+10	ATLAS_2SP
+
+11	ATLAS_2G_SP
+
+13	ATLAS_2G_SPB
+
+15	ATLAS_2SPB
+
+16	ATLAS_PLUS
+
+17	Atlas_Plus_S
+ 
+
+Get AtlasList By System y  GetAtlas retorna null en EnergyMode, en vez de "0, 1 o 2"
+867997032624982 es el unico Real
+si es null, poner N/A
+
+
+el InputConnector Flowmeter no retorna el nombre de DigitalInput
+Resuelto por mi
+
+No puedo diferenciar el tipo de conectores para manejar la logica de textos
+
+En los sensores no retornan el Valor y simbolo
+se añadiran un nuevo System en la finca favorita -> esperar respuesta

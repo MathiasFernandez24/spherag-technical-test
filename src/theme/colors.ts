@@ -48,6 +48,18 @@ const primitiveColors = {
     "800": "#830C0C",
     "900": "#630909",
   },
+  yellow: {
+    "50": "#FFFBE8",
+    "100": "#FFF3B6",
+    "200": "#FFED93",
+    "300": "#FFE462",
+    "400": "#FFDF44",
+    "500": "#FFD715",
+    "600": "#E6C413",
+    "700": "#B39B0F",
+    "800": "#8A760C",
+    "900": "#685A09",
+  },
   base: {
     white: "#FFFFFF",
     black: "#000000",
@@ -88,10 +100,19 @@ export const colors = {
   common: {
     error: primitiveColors.red[500],
     succes: primitiveColors.green[500],
+    allColors: {
+      greenLight: primitiveColors.green[300],
+      green: primitiveColors.green[500],
+      greenDark: primitiveColors.green[800],
+      yellow: primitiveColors.yellow[700],
+      red: primitiveColors.red[500],
+      grey: primitiveColors.grey[500],
+    },
   },
   mapPin: {
     mapPin1: primitiveColors.green[400],
-    mapPin2: primitiveColors.red[400],
+    mapPin2: primitiveColors.yellow[400],
     mapPin3: primitiveColors.blue[400],
+    mapPin4: primitiveColors.red[400],
   },
 };
